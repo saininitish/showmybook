@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 interface EventSeatMapClientProps {

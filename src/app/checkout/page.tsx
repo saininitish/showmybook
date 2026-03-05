@@ -39,7 +39,7 @@ function CheckoutContent() {
         total: `₹${parseInt(total) + seats.length * 30}`,
         show_details: showDetails,
       });
-    } catch (_) {
+    } catch {
       // Email is best-effort; still confirm booking
     }
     // Simulate payment delay then redirect

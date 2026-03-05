@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageSquare, X, Send, Bot, User } from "lucide-react";
+import { MessageSquare, X, Send, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -49,7 +49,7 @@ export default function Chatbot() {
         ...prev, 
         { id: (Date.now() + 1).toString(), role: "assistant", content: data.reply || data.error }
       ]);
-    } catch (error) {
+    } catch {
       setMessages(prev => [
         ...prev, 
         { id: (Date.now() + 1).toString(), role: "assistant", content: "Sorry, I'm having trouble connecting to my brain right now." }
