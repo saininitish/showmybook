@@ -43,7 +43,7 @@ function LoginContent() {
         if (!res.ok) {
           const msg = (json.error || "Sign in failed").toLowerCase();
           if (res.status === 500) {
-            setMessage({ type: "error", text: "Server config error. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and restart the dev server." });
+            setMessage({ type: "error", text: "Server config error. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Vercel (Project → Settings → Environment Variables) or in .env.local for local dev, then redeploy or restart." });
           } else if (msg.includes("invalid") || msg.includes("credentials")) {
             setMessage({ type: "error", text: "No account found with this email. Please sign up first." });
           } else if (msg.includes("email not confirmed") || msg.includes("confirm your email")) {
@@ -80,7 +80,7 @@ function LoginContent() {
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
         if (res.status === 500) {
-          setMessage({ type: "error", text: "Server config error. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and restart the dev server." });
+          setMessage({ type: "error", text: "Server config error. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Vercel (Project → Settings → Environment Variables) or in .env.local for local dev, then redeploy or restart." });
         } else {
           setMessage({ type: "error", text: json.error || "Sign up failed." });
         }
