@@ -35,4 +35,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
+# don't commit these
+node_modules
+.env
+.cursor
+.vscode
+dist
+build
+*.log
+.DS_Store
