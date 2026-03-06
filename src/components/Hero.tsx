@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { Play, Calendar, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -84,13 +84,17 @@ export default function Hero() {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 hidden md:flex"
+        aria-label="Previous slide"
+        title="Previous slide"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel hidden md:flex md:items-center md:justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 hidden md:flex"
+        aria-label="Next slide"
+        title="Next slide"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel hidden md:flex md:items-center md:justify-center text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10"
       >
         <ChevronRight className="w-6 h-6" />
       </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { ChevronRight, Calendar, MapPin } from "lucide-react";
 import { useRef } from "react";
@@ -51,13 +51,17 @@ export default function EventScroller({ title }: { title: string }) {
       <div className="relative group/nav">
         <button 
           onClick={scrollLeft}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white opacity-0 group-hover/nav:opacity-100 transition-all hover:bg-white/10 hidden md:flex"
+          aria-label="Scroll events left"
+          title="Scroll events left"
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 rounded-full glass-panel hidden md:flex md:items-center md:justify-center text-white opacity-0 group-hover/nav:opacity-100 transition-all hover:bg-white/10"
         >
           <ChevronRight className="w-6 h-6 rotate-180" />
         </button>
         <button 
           onClick={scrollRight}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white opacity-0 group-hover/nav:opacity-100 transition-all hover:bg-white/10 hidden md:flex"
+          aria-label="Scroll events right"
+          title="Scroll events right"
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 rounded-full glass-panel hidden md:flex md:items-center md:justify-center text-white opacity-0 group-hover/nav:opacity-100 transition-all hover:bg-white/10"
         >
           <ChevronRight className="w-6 h-6" />
         </button>

@@ -32,7 +32,7 @@ export default function EventSeatMapClient({ eventId, tierPrice }: EventSeatMapC
     <div className="w-full flex flex-col items-center max-w-2xl mx-auto py-12">
       {/* Event Stage Graphic */}
       <div className="w-full h-32 rounded-t-full bg-gradient-to-b from-accent/40 to-transparent border-t-4 border-accent flex items-start justify-center pt-6 mb-16 relative">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540039155732-6761b54f6cce?q=80&w=1000')] bg-cover bg-center opacity-10 rounded-t-full mask-image-gradient" />
+        <div className="absolute inset-0 bg-[url('/placeholder-image.svg')] bg-cover bg-center opacity-10 rounded-t-full mask-image-gradient" />
         <span className="font-display font-bold tracking-[0.3em] uppercase text-white/80 z-10">Main Stage</span>
       </div>
 

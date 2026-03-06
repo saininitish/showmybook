@@ -43,11 +43,15 @@ export default function Chatbot() {
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
+      const reply =
+        typeof data?.reply === "string" && data.reply.trim().length > 0
+          ? data.reply
+          : "I'm available, but couldn't generate a response right now. Please try again.";
       
       setMessages(prev => [
         ...prev, 
-        { id: (Date.now() + 1).toString(), role: "assistant", content: data.reply || data.error }
+        { id: (Date.now() + 1).toString(), role: "assistant", content: reply }
       ]);
     } catch {
       setMessages(prev => [
@@ -64,6 +68,8 @@ export default function Chatbot() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
+        aria-label="Open chat"
+        title="Open chat"
         className={cn(
           "fixed bottom-6 right-6 w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(124,58,237,0.4)] hover-lift z-50 transition-all duration-300",
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
@@ -75,10 +81,9 @@ export default function Chatbot() {
       {/* Chat Window */}
       <div 
         className={cn(
-          "fixed bottom-6 right-6 w-80 md:w-96 glass-panel rounded-2xl border border-white/10 shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right",
+          "fixed bottom-6 right-6 w-80 md:w-96 h-[500px] glass-panel rounded-2xl border border-white/10 shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right",
           isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
         )}
-        style={{ height: "500px" }}
       >
         {/* Header */}
         <div className="bg-gradient-to-r from-primary/80 to-primary p-4 flex items-center justify-between">
@@ -86,7 +91,12 @@ export default function Chatbot() {
             <Bot className="w-5 h-5" />
             <span className="font-display font-semibold">ReelBook Assistant</span>
           </div>
-          <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white transition-colors">
+          <button
+            onClick={() => setIsOpen(false)}
+            aria-label="Close chat"
+            title="Close chat"
+            className="text-white/80 hover:text-white transition-colors"
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -119,8 +129,8 @@ export default function Chatbot() {
               </div>
               <div className="px-4 py-3 glass-panel rounded-2xl rounded-tl-sm flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" />
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.2s]" />
+                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.4s]" />
               </div>
             </div>
           )}
@@ -140,6 +150,8 @@ export default function Chatbot() {
             <button 
               type="submit" 
               disabled={!input.trim() || isLoading}
+              aria-label="Send message"
+              title="Send message"
               className="absolute right-2 w-8 h-8 bg-primary hover:bg-primary/90 rounded-full flex items-center justify-center text-white disabled:opacity-50 transition-colors"
             >
               <Send className="w-4 h-4 ml-0.5" />

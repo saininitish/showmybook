@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { Calendar, MapPin, Share2, Heart, Clock } from "lucide-react";
 

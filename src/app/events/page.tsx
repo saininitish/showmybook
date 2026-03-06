@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { Filter, ChevronDown, Calendar as CalendarIcon, MapPin, Search } from "lucide-react";
 import { useState } from "react";

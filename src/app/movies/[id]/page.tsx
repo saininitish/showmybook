@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { Play, Star, Clock, Calendar } from "lucide-react";
 

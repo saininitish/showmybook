@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import Groq from 'groq-sdk';
 
+export const runtime = 'nodejs';
+
 // Initialize Groq client
 // It will look for the GROQ_API_KEY environment variable
 const groq = new Groq({
@@ -15,13 +17,46 @@ Current available events: Coldplay Concert, Standup Comedy Special.
 Keep your answers concise, helpful, and friendly. If a user wants to book, tell them to navigate to the Movies or Events tab.
 `;
 
+type IncomingMessage = {
+  role?: string;
+  content?: string;
+};
+
+function createOfflineReply(userText: string) {
+  const text = userText.toLowerCase();
+
+  if (text.includes('movie') || text.includes('film')) {
+    return 'You can book movies from the Movies tab. Popular picks right now: Dune: Part Two, Oppenheimer, The Batman, and Inception.';
+  }
+
+  if (text.includes('event') || text.includes('concert') || text.includes('show')) {
+    return 'You can book events from the Events tab. Current highlights: Coldplay concert and Standup Comedy Special.';
+  }
+
+  if (text.includes('ticket') || text.includes('book')) {
+    return 'To book tickets, open Movies or Events, select your show, then choose seats and continue to checkout.';
+  }
+
+  return 'I can help with movie and event bookings. Ask me for recommendations, show details, or booking steps.';
+}
+
 export async function POST(req: Request) {
+  let lastUserMessage = '';
   try {
-    const { messages } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const rawMessages: IncomingMessage[] = Array.isArray(body?.messages) ? body.messages : [];
+    const messages = rawMessages
+      .filter((m) => typeof m?.content === 'string' && m.content.trim().length > 0)
+      .map((m) => ({
+        role: m.role === 'assistant' ? 'assistant' : 'user',
+        content: String(m.content),
+      }));
+
+    lastUserMessage = [...messages].reverse().find((m) => m.role === 'user')?.content ?? '';
 
     if (!process.env.GROQ_API_KEY) {
       return NextResponse.json(
-        { reply: "Groq API key not configured. I'm running in offline mode, but I'm here to help you book tickets on ReelBook!" },
+        { reply: createOfflineReply(lastUserMessage) },
         { status: 200 }
       );
     }
@@ -37,13 +72,13 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({
-      reply: chatCompletion.choices[0]?.message?.content || "I couldn't process that request."
+      reply: chatCompletion.choices[0]?.message?.content || createOfflineReply(lastUserMessage)
     });
   } catch (error) {
     console.error('Groq API Error:', error);
     return NextResponse.json(
-      { error: 'Failed to process chat request' },
-      { status: 500 }
+      { reply: createOfflineReply(lastUserMessage) },
+      { status: 200 }
     );
   }
 }

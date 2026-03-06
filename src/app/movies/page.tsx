@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import Image from "@/components/AppImage";
 import Link from "next/link";
 import { Star, Filter, ChevronDown, Search } from "lucide-react";
 import { useState } from "react";
@@ -10,7 +10,7 @@ const MOVIES = [
   { id: "1", title: "Oppenheimer", genre: "Biography • Drama", rating: 8.6, poster: "https://image.tmdb.org/t/p/w500/8Gxv8gS8UPTFyHB0fuQwUDQ0xYA.jpg" },
   { id: "2", title: "The Batman", genre: "Action • Crime", rating: 7.8, poster: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg" },
   { id: "3", title: "Spider-Man: Spider-Verse", genre: "Animation • Action", rating: 8.6, poster: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" },
-  { id: "4", title: "Inception", genre: "Action • Sci-Fi", rating: 8.8, poster: "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5ucge.jpg" },
+  { id: "4", title: "Inception", genre: "Action • Sci-Fi", rating: 8.8, poster: "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" },
   { id: "5", title: "Interstellar", genre: "Sci-Fi • Thriller", rating: 8.6, poster: "https://image.tmdb.org/t/p/w500/gEU2QlsEOVSAxFewqsziyTo4hN.jpg" },
   { id: "6", title: "John Wick", genre: "Action • Thriller", rating: 7.4, poster: "https://image.tmdb.org/t/p/w500/ziEuG1essDuWuC5lpWUaw1uXY2O.jpg" },
   { id: "7", title: "Dune: Part Two", genre: "Action • Sci-Fi", rating: 8.8, poster: "https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg" },
